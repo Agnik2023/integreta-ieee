@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrata</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Karantina:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-2: #101c31;
+      --bg-3: #dbe8ff;
+      --surface: rgba(219, 232, 255, 0.88);
+      --surface-strong: #c2d7ff;
+      --surface-dark: rgba(8, 17, 31, 0.88);
+      --ink: #0d1628;
+      --muted: #4f6286;
+      --line: rgba(12, 21, 37, 0.12);
+      --line-dark: rgba(219, 232, 255, 0.16);
+      --accent: #89b3ff;
+      --accent-soft: #bcd4ff;
+      --font-body: 'Inter', sans-serif;
+      --font-display: 'Karantina', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(137, 179, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 90% 18%, rgba(188, 212, 255, 0.2), transparent 20%),
+        linear-gradient(135deg, #07111e 0%, #0c1627 46%, #d9e7ff 100%);
+      font-family: var(--font-body);
+      color: var(--bg-3);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .site::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 26%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: auto, 72px 72px, 72px 72px;
+      opacity: 0.26;
+      z-index: -1;
+    }
+
+    .site::after {
+      content: "";
+      position: fixed;
+      inset: auto -12vw -18vw auto;
+      width: 38vw;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(188, 212, 255, 0.55), transparent 68%);
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .page-shell {
+      width: min(100%, 1440px);
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem 2rem;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--line-dark);
+      border-radius: 1.2rem;
+      background: rgba(7, 16, 29, 0.62);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(2, 8, 19, 0.25);
+    }
+
+    .topbar__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+      justify-self: start;
+    }
+
+    .topbar__brand img {
+      max-width: 90px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .topbar__title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5.6rem);
+      font-weight: 700;
+      line-height: 0.78;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--bg-3);
+      justify-self: center;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .topbar__logos {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-self: end;
+    }
+
+    .topbar__logo {
+      max-width: 90px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: stretch;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero__content,
+    .hero__panel,
+    .section,
+    .footer {
+      border-radius: 1.6rem;
+      border: 1px solid var(--line-dark);
+      box-shadow: 0 18px 48px rgba(1, 6, 16, 0.22);
+    }
+
+    .hero__content {
+      position: relative;
+      padding: 1.5rem 2rem 2rem;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(137, 179, 255, 0.28), transparent 18%),
+        radial-gradient(circle at 88% 14%, rgba(188, 212, 255, 0.18), transparent 16%),
+        linear-gradient(160deg, rgba(7, 16, 29, 0.96), rgba(12, 23, 39, 0.9));
+    }
+
+    .hero__content::after {
+      content: "";
+      position: absolute;
+      inset: auto -6rem -7rem auto;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      border: 1px solid rgba(188, 212, 255, 0.2);
+      opacity: 0.55;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 7.5vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      color: var(--bg-3);
+      text-align: center;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.35rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button--primary {
+      background: var(--accent-soft);
+      color: var(--ink);
+      box-shadow: 0 14px 28px rgba(137, 179, 255, 0.2);
+    }
+
+    .button--ghost {
+      background: rgba(219, 232, 255, 0.05);
+      border-color: rgba(188, 212, 255, 0.18);
+      color: rgba(219, 232, 255, 0.92);
+    }
+
+    .hero__facts {
+      display: none;
+    }
+
+    .track-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .track-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 7.5rem;
+      padding: 1rem 1.2rem;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(188, 212, 255, 0.16);
+      background: rgba(219, 232, 255, 0.07);
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(1, 6, 16, 0.16);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .track-button:hover {
+      transform: translateY(-2px);
+      background: rgba(219, 232, 255, 0.12);
+      border-color: rgba(188, 212, 255, 0.28);
+    }
+
+    .track-button img {
+      width: min(100%, 220px);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.18));
+    }
+
+    .hero__actions {
+      display: none;
+    }
+
+    .topbar__nav,
+    .hero__panel,
+    .section,
+    .footer {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        padding: 0.85rem;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr auto 1fr;
+        padding: 0.85rem;
+      }
+
+      .topbar__brand img,
+      .topbar__logos img {
+        max-width: 70px;
+      }
+
+      .topbar__logos {
+        gap: 0.7rem;
+      }
+
+      .hero__content {
+        padding: 1rem;
+        border-radius: 1.15rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 16vw, 4.6rem);
+      }
+
+      .topbar__title {
+        font-size: clamp(2.1rem, 12vw, 3.4rem);
+      }
+
+      .track-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="site">
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="topbar__brand">
+          <img src="IEEE light.png" alt="IEEE SB AOT" class="topbar__logo">
+        </div>
+
+        <h1 class="topbar__title">Integrata</h1>
+
+        <div class="topbar__logos">
+          <img src="AOT.jpg" alt="Academy of Technology" class="topbar__logo">
+        </div>
+      </header>
+
+      <section class="hero" aria-label="Integrata overview">
+        <div class="hero__content">
+          <div class="track-buttons" id="tracks">
+            <a class="track-button" href="https://tinyurl.com/ieeeroots" target="_blank" rel="noreferrer" aria-label="Open ROOTS registration">
+              <img src="roots.png" alt="ROOTS">
+            </a>
+            <a class="track-button" href="https://forms.gle/Vr6fFEejtkGEoDhQ7" target="_blank" rel="noreferrer" aria-label="Open VIEW registration">
+              <img src="view.png" alt="VIEW">
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
