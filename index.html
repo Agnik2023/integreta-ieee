@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Integrata</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Karantina:wght@300;400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Karantina:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #08111f;
@@ -116,7 +115,8 @@
       justify-self: start;
     }
 
-    .topbar__brand img {
+    .topbar__brand img,
+    .topbar__logo {
       max-width: 90px;
       height: auto;
       object-fit: contain;
@@ -143,12 +143,6 @@
       justify-self: end;
     }
 
-    .topbar__logo {
-      max-width: 90px;
-      height: auto;
-      object-fit: contain;
-    }
-
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -158,8 +152,6 @@
     }
 
     .hero__content,
-    .hero__panel,
-    .section,
     .footer {
       border-radius: 1.6rem;
       border: 1px solid var(--line-dark);
@@ -185,16 +177,6 @@
       border-radius: 50%;
       border: 1px solid rgba(188, 212, 255, 0.2);
       opacity: 0.55;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(3.4rem, 7.5vw, 6.8rem);
-      line-height: 0.92;
-      letter-spacing: -0.05em;
-      color: var(--bg-3);
-      text-align: center;
     }
 
     .event-intro {
@@ -240,13 +222,6 @@
       line-height: 1.7;
     }
 
-    .hero__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.35rem;
-    }
-
     .button {
       display: inline-flex;
       align-items: center;
@@ -257,7 +232,7 @@
       text-decoration: none;
       font-weight: 800;
       border: 1px solid transparent;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
     }
 
     .button:hover {
@@ -270,14 +245,30 @@
       box-shadow: 0 14px 28px rgba(137, 179, 255, 0.2);
     }
 
-    .button--ghost {
-      background: rgba(219, 232, 255, 0.05);
-      border-color: rgba(188, 212, 255, 0.18);
-      color: rgba(219, 232, 255, 0.92);
+    .button--whatsapp {
+      background: rgba(37, 211, 102, 0.08);
+      border-color: rgba(37, 211, 102, 0.3);
+      color: #4ade80;
     }
 
-    .hero__facts {
-      display: none;
+    .button--whatsapp:hover {
+      background: rgba(37, 211, 102, 0.15);
+      border-color: rgba(37, 211, 102, 0.5);
+      color: #86efac;
+    }
+
+    .button--action {
+      margin-top: 1.5rem;
+      align-self: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      min-height: 2.6rem;
+    }
+
+    .whatsapp-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
     }
 
     .track-buttons {
@@ -288,16 +279,16 @@
     }
 
     .track-card {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 0.8rem;
-      align-content: start;
     }
 
     .track-button {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 7.5rem;
+      height: 9.5rem;
       padding: 1rem 1.2rem;
       border-radius: 1.25rem;
       border: 1px solid rgba(188, 212, 255, 0.16);
@@ -325,6 +316,7 @@
     }
 
     .track-details {
+      flex: 1;
       margin: 0;
       padding: 1rem 1.05rem;
       border: 1px solid rgba(188, 212, 255, 0.14);
@@ -332,6 +324,8 @@
       background: rgba(7, 16, 29, 0.5);
       color: rgba(219, 232, 255, 0.84);
       box-shadow: 0 12px 26px rgba(1, 6, 16, 0.14);
+      display: flex;
+      flex-direction: column;
     }
 
     .track-details__eyebrow {
@@ -356,26 +350,13 @@
       padding-left: 0.1rem;
     }
 
-    .hero__actions {
-      display: none;
-    }
-
-    .topbar__nav,
-    .hero__panel,
-    .section {
-      display: none;
-    }
-
     .footer {
       display: grid;
       gap: 0.75rem;
       margin-top: 1.25rem;
       padding: 1rem 1.1rem;
-      border-radius: 1.2rem;
-      border: 1px solid var(--line-dark);
       background: rgba(7, 16, 29, 0.62);
       backdrop-filter: blur(18px);
-      box-shadow: 0 18px 50px rgba(2, 8, 19, 0.22);
       color: rgba(219, 232, 255, 0.84);
       text-align: left;
     }
@@ -443,10 +424,6 @@
       color: var(--bg-3);
     }
 
-    .footer__meta {
-      display: none;
-    }
-
     .footer__note {
       margin: 0;
       padding-top: 0.75rem;
@@ -454,6 +431,12 @@
       color: rgba(219, 232, 255, 0.72);
       font-size: 0.82rem;
       letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 950px) {
+      .track-buttons {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
@@ -467,7 +450,7 @@
       }
 
       .topbar__brand img,
-      .topbar__logos img {
+      .topbar__logo {
         max-width: 70px;
       }
 
@@ -485,10 +468,6 @@
         margin-bottom: 1rem;
       }
 
-      .hero h1 {
-        font-size: clamp(2.8rem, 16vw, 4.6rem);
-      }
-
       .event-intro__title {
         font-size: clamp(1.9rem, 12vw, 3rem);
       }
@@ -497,8 +476,10 @@
         font-size: clamp(2.1rem, 12vw, 3.4rem);
       }
 
-      .track-buttons {
-        grid-template-columns: 1fr;
+      .track-button {
+        height: 6.5rem;
+        padding: 0.75rem 0.85rem;
+        border-radius: 1rem;
       }
 
       .track-card {
@@ -534,7 +515,7 @@
       }
 
       .topbar__brand img,
-      .topbar__logos img {
+      .topbar__logo {
         max-width: 46px;
       }
 
@@ -588,7 +569,6 @@
       }
 
       .track-button {
-        min-height: 5.9rem;
         padding: 0.75rem 0.85rem;
         border-radius: 1rem;
       }
@@ -622,7 +602,6 @@
       }
 
       .footer__subtitle,
-      .footer__meta,
       .footer__note {
         font-size: 0.8rem;
       }
@@ -637,9 +616,7 @@
         <div class="topbar__brand">
           <img src="IEEE%20light.png" alt="IEEE SB AOT" class="topbar__logo">
         </div>
-
         <h1 class="topbar__title">Integrata</h1>
-
         <div class="topbar__logos">
           <img src="aotlogo.svg" alt="Academy of Technology" class="topbar__logo">
         </div>
@@ -655,21 +632,6 @@
           </div>
 
           <div class="track-buttons" id="tracks">
-            <div class="track-card track-card--roots">
-              <a class="track-button" href="https://tinyurl.com/ieeeroots" target="_blank" rel="noreferrer" aria-label="Open ROOTS registration">
-                <img src="Roots Logo C.png" alt="ROOTS" class="roots-logo">
-              </a>
-              <div class="track-details" aria-label="ROOTS event details">
-                <p class="track-details__eyebrow">ROOTS at a glance</p>
-                <ul class="track-details__list">
-                  <li><strong>15.05.2026</strong> | Online quiz round from <strong>6:00 p.m. to 10:00 p.m.</strong></li>
-                  <li>MCQ-based qualifying round on <strong>Data Structures and Algorithms</strong>.</li>
-                  <li><strong>20.05.2026</strong> | In-person DSA contest, from <strong>2:30 p.m. to 4:30 p.m.</strong></li>
-                  <li><strong>Venue</strong>: <strong>TBD</strong></li>
-                  <li>Separate sets for <strong>1st Year</strong> and <strong>2nd to 4th Year</strong> participants.</li>
-                </ul>
-              </div>
-            </div>
             <div class="track-card track-card--view">
               <a class="track-button" href="https://forms.gle/Vr6fFEejtkGEoDhQ7" target="_blank" rel="noreferrer" aria-label="Open VIEW registration">
                 <img src="view1.png" alt="VIEW">
@@ -677,17 +639,53 @@
               <div class="track-details" aria-label="VIEW event details">
                 <p class="track-details__eyebrow">VIEW at a glance</p>
                 <ul class="track-details__list">
-                  <li><strong>16.05.2026 to 18.05.2026</strong> | Online prototyping phase from <strong>9:00 p.m. (May 16)</strong> to <strong>6:00 a.m. (May 18)</strong>.</li>
-                  <li>Teams receive problem niche focused on <strong>Innovation</strong>, wireframes, and basic architectural design.</li>
-                  <li>Shortlisted teams advance to the offline development sprint for the final round.</li>
-                  <li><strong>23.05.2026</strong> | Finale from <strong>12:00 p.m. to 5:00 p.m.</strong></li>
-                  <li><strong>Venue</strong>: <strong>TBD</strong></li>
-                  <li>Live pitching, professional sessions, final judging, and prize distribution for the App Dev track.</li>
-                  <li>Team participation: <strong>2 members per team</strong>.</li>
+                  <li><strong>16.05.2026 to 18.05.2026</strong> | Round 1: A <strong>33-Hour</strong> online prototyping sprint from <strong>9:00 p.m.</strong> to <strong>6:00 a.m.</strong></li>
+                  <li>Tackle <strong>real-world scenarios</strong> to design logical architecture, clear user flows, and a high-fidelity MVP. Submission requires a detailed <strong>GitHub README</strong>.</li>
+                  <li><strong>23.05.2026</strong> | Round 2: Offline Finale (<strong>12:00 p.m. to 5:00 p.m.</strong>) for shortlisted teams to live-pitch their solutions.</li>
+                  <li>Liberal use of <strong>AI tools</strong> is allowed, provided you can fully explain your code and system architecture.</li>
+                  <li><strong>Participation:</strong> Teams of exactly <strong>2 members</strong> (cross-year and cross-department teams encouraged!).</li>
+                  <li><strong>Entry Fee:</strong> <strong>₹50</strong> per team.</li>
                 </ul>
+                <a class="button button--primary button--action" href="https://docs.google.com/forms/d/e/1FAIpQLSeXvZLigpECchAG2Sl-G51BT4m2wnGJKfhu_olMwhNiIusZZw/viewform?usp=dialogS" target="_blank" rel="noreferrer">
+                  Register now
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="track-card track-card--roots">
+              <a class="track-button" href="https://tinyurl.com/ieeeroots" target="_blank" rel="noreferrer" aria-label="Open ROOTS registration">
+                <img src="Roots Logo C.png" alt="ROOTS" class="roots-logo">
+              </a>
+              <div class="track-details" aria-label="ROOTS event details">
+                <p class="track-details__eyebrow">ROOTS at a glance</p>
+                <ul class="track-details__list">
+                  <li><strong>15.05.2026</strong> | Round 1: Online Qualifying Quiz on <strong>Unstop</strong> from <strong>6:00 p.m. to 10:00 p.m.</strong></li>
+                  <li><strong>20.05.2026</strong> | Round 2: Offline Final DSA Contest (from <strong>2:30 p.m. to 4:30 p.m.</strong>) for shortlisted candidates.</li>
+                  <li><strong>Entry:</strong> Completely <strong>FREE</strong> for individual AOT students across all branches.</li>
+                  <li>Separate competition categories for <strong>1st Year</strong> and <strong>2nd & 3rd Year</strong> participants.</li>
+                  <li><strong>Prizes:</strong> <strong>₹500 cash</strong> for category winners, plus premium swags, trophies, and certificates!</li>
+                </ul>
+                <a class="button button--primary button--action" href="https://unstop.com/o/a1H63G9?lb=J9lA5S9y&utm_medium=Share&utm_source=vineemis70625&utm_campaign=Online_coding_challenge" target="_blank" rel="noreferrer">
+                  Event page
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>              
               </div>
             </div>
           </div>
+
+          <div class="whatsapp-wrapper">
+            <a class="button button--whatsapp" href="https://chat.whatsapp.com/ERoJlUVTvxeLccTHlXQzE1" target="_blank" rel="noreferrer">
+              Join Query Group (WhatsApp)
+            </a>
+          </div>
+
         </div>
       </section>
 
