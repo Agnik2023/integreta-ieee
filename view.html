@@ -750,6 +750,14 @@
 
             <div class="rules-grid">
 
+              <!-- Hackathon Countdown Timer -->
+              <div class="rules-card full-width" style="text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(137, 179, 255, 0.05) 0%, rgba(137, 179, 255, 0.1) 100%); border: 1px solid rgba(137, 179, 255, 0.3); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(137, 179, 255, 0.1) 0%, transparent 60%); animation: pulse 4s infinite;"></div>
+                <div style="font-size: 1.2rem; color: var(--accent-soft); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 3px; position: relative; z-index: 2;">Hackathon ends in</div>
+                <div id="hackathon-timer" style="font-family: var(--font-display); font-size: 4rem; color: var(--accent); text-shadow: 0 0 20px rgba(137, 179, 255, 0.6); line-height: 1; position: relative; z-index: 2;">00:00:00</div>
+              </div>
+
+
               <!-- Timeline (Full Width) -->
               <div class="rules-card full-width">
                 <h3>Official Event Timeline</h3>
@@ -1011,19 +1019,25 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Countdown Target: May 16, 2026 20:00:00 (Local Time)
+      // Countdown Target 1: May 16, 2026 20:00:00 (Problem Statements)
       const countDownDate = new Date("May 16, 2026 20:00:00").getTime();
+      
+      // Countdown Target 2: May 18, 2026 06:00:00 (Hackathon Ends)
+      const hackathonEndDate = new Date("May 18, 2026 06:00:00").getTime();
 
       const timerEl = document.getElementById("countdown-timer");
       const overlayEl = document.getElementById("problem-overlay");
       const contentEl = document.getElementById("problem-content");
+      const hackathonTimerEl = document.getElementById("hackathon-timer");
 
       function updateTimer() {
         const now = new Date().getTime();
-        const distance = countDownDate - now;
+        
+        // --- Timer 1 Logic (Problem Statements Reveal) ---
+        const distanceReveal = countDownDate - now;
 
-        if (distance <= 0) {
-          // Time passed, reveal content
+        if (distanceReveal <= 0) {
+          // Reveal content
           if(overlayEl) overlayEl.style.opacity = "0";
           setTimeout(() => { if(overlayEl) overlayEl.style.display = "none"; }, 800);
           
@@ -1034,21 +1048,41 @@
             contentEl.style.userSelect = "auto";
             contentEl.style.filter = "none";
           }
-          return true; // Stop timer
+        } else {
+          // Update reveal timer text
+          const hours = Math.floor((distanceReveal % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distanceReveal % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distanceReveal % (1000 * 60)) / 1000);
+
+          if(timerEl) {
+            timerEl.innerHTML = 
+              String(hours).padStart(2, '0') + ":" + 
+              String(minutes).padStart(2, '0') + ":" + 
+              String(seconds).padStart(2, '0');
+          }
         }
 
-        // Calculations for hours, minutes and seconds
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if(timerEl) {
-          timerEl.innerHTML = 
-            String(hours).padStart(2, '0') + ":" + 
-            String(minutes).padStart(2, '0') + ":" + 
-            String(seconds).padStart(2, '0');
+        // --- Timer 2 Logic (Hackathon Ends) ---
+        const distanceHack = hackathonEndDate - now;
+        if (distanceHack > 0) {
+          const totalHours = Math.floor(distanceHack / (1000 * 60 * 60));
+          const mins = Math.floor((distanceHack % (1000 * 60 * 60)) / (1000 * 60));
+          const secs = Math.floor((distanceHack % (1000 * 60)) / 1000);
+          
+          if (hackathonTimerEl) {
+            hackathonTimerEl.innerHTML = 
+              String(totalHours).padStart(2, '0') + ":" + 
+              String(mins).padStart(2, '0') + ":" + 
+              String(secs).padStart(2, '0');
+          }
+        } else {
+          if (hackathonTimerEl) {
+            hackathonTimerEl.innerHTML = "00:00:00";
+          }
         }
-        return false;
+
+        // Continue running the interval as long as the hackathon timer is active
+        return distanceHack <= 0;
       }
 
       const isDone = updateTimer();
