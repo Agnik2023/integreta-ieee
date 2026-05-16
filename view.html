@@ -671,6 +671,59 @@
         font-size: 0.8rem;
       }
     }
+
+    .blurred-content {
+      filter: blur(10px);
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.6;
+      transition: filter 0.8s ease, opacity 0.8s ease;
+    }
+
+    .niche-block {
+      background: rgba(219, 232, 255, 0.04);
+      border: 1px solid rgba(188, 212, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .niche-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .niche-block h4 {
+      margin-top: 0;
+      color: var(--accent-soft);
+      font-size: 1.35rem;
+      border-bottom: 1px dashed rgba(188, 212, 255, 0.2);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .niche-block p {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: rgba(219, 232, 255, 0.85);
+    }
+
+    .niche-block strong {
+      color: var(--bg-3);
+    }
+
+    .niche-block ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 0.2rem;
+    }
+    
+    .niche-block ul li {
+      margin-bottom: 0.4rem;
+      color: rgba(219, 232, 255, 0.82);
+    }
   </style>
 </head>
 
@@ -760,15 +813,84 @@
               </div>
 
               <!-- Problem Statements -->
-              <div class="rules-card rules-card--pulse full-width" style="text-align: center; padding: 2.5rem 1.8rem; border-color: rgba(137, 179, 255, 0.4); background: linear-gradient(180deg, rgba(7, 16, 29, 0.5) 0%, rgba(12, 23, 39, 0.8) 100%);">
-                <h3 style="border-bottom: none; margin-bottom: 0.5rem; color: var(--bg-3); font-size: 1.8rem;">Problem Statements</h3>
-                <p style="margin: 0; color: var(--accent-soft); font-size: 1.1rem; font-weight: 500;">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 0.5rem; margin-top: -3px;">
+              <div class="rules-card rules-card--pulse full-width" style="text-align: left; padding: 2.5rem 1.8rem; border-color: rgba(137, 179, 255, 0.4); background: linear-gradient(180deg, rgba(7, 16, 29, 0.5) 0%, rgba(12, 23, 39, 0.8) 100%); position: relative;">
+                <h3 style="border-bottom: 1px solid rgba(188, 212, 255, 0.14); margin-bottom: 1.5rem; color: var(--bg-3); font-size: 1.8rem; text-align: center;">Problem Statements</h3>
+                
+                <div id="problem-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; background: rgba(7, 16, 29, 0.6); border-radius: 1.25rem; backdrop-filter: blur(2px); transition: opacity 0.8s ease;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem; filter: drop-shadow(0 0 8px rgba(137, 179, 255, 0.6));">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>
-                  5 Problem Niches will be revealed and uploaded here shortly. Stay tuned!
-                </p>
+                  <div style="font-size: 1.2rem; color: var(--bg-3); font-weight: 600; margin-bottom: 0.5rem; text-align: center;">Unlocking in</div>
+                  <div id="countdown-timer" style="font-family: var(--font-display); font-size: 3.5rem; color: var(--accent); text-shadow: 0 0 16px rgba(137, 179, 255, 0.4); line-height: 1; text-align: center;">00:00:00</div>
+                </div>
+
+                <div id="problem-content" class="blurred-content">
+                  <div class="niche-block">
+                    <h4>Niche 1: "Tinder" for Hackers, Hustlers, and Builders</h4>
+                    <p><strong>The Scenario:</strong> Finding a teammate for a hackathon, a co-founder for a side hustle, or a drummer for a campus band usually involves awkward WhatsApp group texts or knowing the right people. But building great things isn't just about matching tech stacks (e.g., "I know React, you know Node"); it's about the vibe. Do you both work at 3 AM? Do you prefer local LLMs or cloud APIs? Are you highly competitive or just doing it for fun?</p>
+                    <p><strong>The Pain Points:</strong></p>
+                    <ul>
+                      <li>Current networking is too formal and resume-focused.</li>
+                      <li>No way to gauge work style, humor, or "vibe" before committing to a 48-hour hackathon together.</li>
+                      <li>High friction in breaking the ice.</li>
+                    </ul>
+                    <p><strong>The Challenge:</strong> Build a matchmaking platform that pairs students based on project needs, creative energy, and working habits rather than just a dry list of skills.</p>
+                    <p><strong>Innovation Vectors:</strong> A swipe-based mobile app with quirky profile prompts ("My most toxic debugging trait is..."), an algorithm that matches people based on their Spotify listening habits during coding sessions, or a web platform that uses AI to generate icebreaker questions when a match is made.</p>
+                  </div>
+
+                  <div class="niche-block">
+                    <h4>Niche 2: The Democratic Aux Cord (Hostel/Event DJ)</h4>
+                    <p><strong>The Scenario:</strong> Whether it’s a hostel room with 5 people, a road trip, or a post-hackathon chill session, controlling the music is always a battlefield. One person hogs the Bluetooth, or everyone tries to shout their song requests. The vibe gets killed when someone plays a terrible track, and there is no democratic way to handle the playlist.</p>
+                    <p><strong>The Pain Points:</strong></p>
+                    <ul>
+                      <li>The "Aux Cord Dictator" ruins the collective mood.</li>
+                      <li>Constantly passing a phone around to queue songs is disruptive.</li>
+                      <li>No way to collectively decide if a song should be skipped.</li>
+                    </ul>
+                    <p><strong>The Challenge:</strong> Build the ultimate, democratic, shared-audio queue system that gamifies music selection and keeps the party engaged.</p>
+                    <p><strong>Innovation Vectors:</strong> A web app where everyone in the room joins via a session code to add songs and anonymously upvote/downvote the queue (if a song drops below a certain score, it auto-skips). Or, a system that analyzes the general BPM/vibe of the requested songs and uses AI to seamlessly transition between entirely different genres.</p>
+                  </div>
+
+                  <div class="niche-block">
+                    <h4>Niche 3: The Algorithmic Fatigue (Digital Wellbeing)</h4>
+                    <p><strong>The Scenario:</strong> We are losing the battle against addictive algorithms. Standard "Screen Time" apps or website blockers are fundamentally flawed—they act as a blunt force (simply locking an app), which causes the user to just bypass the lock or switch to another device. They treat the symptom, not the underlying behavioral loop of mindless scrolling, doom-scrolling, and digital burnout.</p>
+                    <p><strong>The Pain Points:</strong></p>
+                    <ul>
+                      <li>Blockers are easily bypassed and feel punitive.</li>
+                      <li>Lack of friction before the user falls into an infinite scroll loop.</li>
+                      <li>Users are unaware of how their digital habits are directly affecting their mood and productivity in real-time.</li>
+                    </ul>
+                    <p><strong>The Challenge:</strong> Build a product that introduces "healthy friction" or intercepts mindless digital behavior before it starts, promoting intentional technology use.</p>
+                    <p><strong>Innovation Vectors:</strong> A browser extension that forces you to type why you are opening YouTube before letting you in, a mobile app that gamifies offline time using a virtual pet, or a CLI dashboard that visualizes your digital carbon footprint and screen-time waste.</p>
+                  </div>
+
+                  <div class="niche-block">
+                    <h4>Niche 4: The Fragmented Attention Economy of a Scholar</h4>
+                    <p><strong>The Scenario:</strong> A standard engineering student lives in a state of constant digital fragmentation. In a single day, they check a college LMS for assignments, a WhatsApp group for sudden schedule changes, an email for placement updates, YouTube/GeeksforGeeks for self-study, and Notion/Google Keep for personal notes. There is no unified "brain" for their academic and extracurricular life. Information slips through the cracks, leading to missed deadlines, anxiety, and extreme context-switching fatigue.</p>
+                    <p><strong>The Pain Points:</strong></p>
+                    <ul>
+                      <li>Siloed platforms that do not communicate with each other.</li>
+                      <li>High cognitive load required to manually track deadlines, events, and study materials across 5+ apps.</li>
+                      <li>Lack of a centralized "daily briefing" tailored to a student's exact reality.</li>
+                    </ul>
+                    <p><strong>The Challenge:</strong> Build a system that unifies and declutters the student experience. How can you intercept, organize, and present critical daily data seamlessly?</p>
+                    <p><strong>Innovation Vectors:</strong> A unified dashboard web-app, a background CLI tool that scrapes and aggregates notifications, or an AI-powered browser extension that links LMS deadlines directly to a personal calendar.</p>
+                  </div>
+
+                  <div class="niche-block">
+                    <h4>Niche 5: The "Physical Git" (Distributed Hardware Sandbox)</h4>
+                    <p><strong>The Scenario:</strong> Your engineering group is building a custom drone or an IoT smart-planter for a hackathon. The problem? The team has exactly one physical hardware prototype, and it lives on Dave’s desk. If Sarah wants to test her sensor calibration code, she has to physically walk to his dorm or wait for him to flash her code and text a video of what happened. Collaborative hardware development operates at a snail's pace because the physical device cannot be duplicated.</p>
+                    <p><strong>The Pain Points:</strong></p>
+                    <ul>
+                      <li>The serialized bottleneck means only one person can interface with the hardware at any given time.</li>
+                      <li>Constantly passing fragile breadboards between teammates leads to loose connections and broken pins.</li>
+                      <li>No way to seamlessly write, flash, and debug embedded code as a distributed remote team.</li>
+                    </ul>
+                    <p><strong>The Challenge:</strong> Build a network-accessible hosting rig that abstracts a single physical microcontroller into a shared, remote-access sandbox.</p>
+                    <p><strong>Innovation Vectors:</strong> A Raspberry Pi rig featuring a live webcam stream, over-the-air firmware flashing, and a web serial monitor for real-time remote debugging. Or, a digital multiplexer setup allowing remote teammates to trigger hardware breakpoints and simulate raw sensor inputs directly from their browsers.</p>
+                  </div>
+                </div>
               </div>
 
 
@@ -886,6 +1008,59 @@
       </footer>
     </div>
   </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Countdown Target: May 16, 2026 20:00:00 (Local Time)
+      const countDownDate = new Date("May 16, 2026 20:00:00").getTime();
+
+      const timerEl = document.getElementById("countdown-timer");
+      const overlayEl = document.getElementById("problem-overlay");
+      const contentEl = document.getElementById("problem-content");
+
+      function updateTimer() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        if (distance <= 0) {
+          // Time passed, reveal content
+          if(overlayEl) overlayEl.style.opacity = "0";
+          setTimeout(() => { if(overlayEl) overlayEl.style.display = "none"; }, 800);
+          
+          if(contentEl) {
+            contentEl.classList.remove("blurred-content");
+            contentEl.style.opacity = "1";
+            contentEl.style.pointerEvents = "auto";
+            contentEl.style.userSelect = "auto";
+            contentEl.style.filter = "none";
+          }
+          return true; // Stop timer
+        }
+
+        // Calculations for hours, minutes and seconds
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if(timerEl) {
+          timerEl.innerHTML = 
+            String(hours).padStart(2, '0') + ":" + 
+            String(minutes).padStart(2, '0') + ":" + 
+            String(seconds).padStart(2, '0');
+        }
+        return false;
+      }
+
+      const isDone = updateTimer();
+      if (!isDone) {
+        const interval = setInterval(function() {
+          if(updateTimer()) {
+            clearInterval(interval);
+          }
+        }, 1000);
+      }
+    });
+  </script>
 </body>
 
 </html>
